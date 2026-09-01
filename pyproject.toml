@@ -1,0 +1,17 @@
+[project]
+name = "ai-learning"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "赵亦卿", email = "10956558+zhao_yiqing@user.noreply.gitee.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+ai-learning = "ai_learning:main"
+
+[build-system]
+requires = ["uv_build>=0.12.8,<0.13.0"]
+build-backend = "uv_build"
