@@ -7,7 +7,13 @@ authors = [
     { name = "赵亦卿", email = "10956558+zhao_yiqing@user.noreply.gitee.com" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "fastapi>=0.141.1",
+    "httpx>=0.28.1",
+    "pydantic>=2.13.5",
+    "python-dotenv>=1.2.3",
+    "uvicorn>=0.52.4",
+]
 
 [project.scripts]
 ai-learning = "ai_learning:main"

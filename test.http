@@ -1,0 +1,22 @@
+### 健康检查
+GET http://127.0.0.1:8000/health
+
+### Echo测试
+POST http://127.0.0.1:8000/echo
+Content-Type: application/json
+
+{
+  "message": "Hello AI",
+  "user_id": "java_dev_001"
+}
+
+### 测试路径参数
+GET http://127.0.0.1:8000/items/123
+
+### 测试中文 Echo
+POST http://127.0.0.1:8000/echo?lang=zh
+Content-Type: application/json
+
+{
+  "message": "世界你好"
+}
