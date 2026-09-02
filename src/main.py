@@ -1,14 +1,28 @@
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 import logging
+import sys
 
-# 配置日志
-logging.basicConfig(level=logging.INFO)
+# 导入我们的配置
+from .config import settings
+# ----- 配置日志（动态级别）-----
+logging.basicConfig(
+    level=getattr(logging, settings.log_level.upper(), logging.INFO),
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    handlers=[
+        logging.StreamHandler(sys.stdout)  # 输出到控制台
+    ]
+)
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="AI Learning Service", version="0.1.0")
+# ----- 创建应用（使用配置中的名称）-----
+app = FastAPI(
+    title=settings.app_name,
+    version="0.2.0",
+    debug=settings.debug
+)
 
-# ----- 日志中间件（相当于 Spring Filter） -----
+# ----- 日志中间件 -----
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
     logger.info(f"Request: {request.method} {request.url.path}")
