@@ -22,6 +22,11 @@ app = FastAPI(
     debug=settings.debug
 )
 
+# ===== 新增：注册路由 =====
+from src.routers import banking
+app.include_router(banking.router)
+
+
 # ----- 日志中间件 -----
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
