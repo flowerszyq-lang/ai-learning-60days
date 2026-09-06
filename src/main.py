@@ -5,6 +5,8 @@ import sys
 
 # 导入我们的配置
 from .config import settings
+from .models import db_models  # 这行确保模型被注册
+from .database import engine, Base
 # ----- 配置日志（动态级别）-----
 logging.basicConfig(
     level=getattr(logging, settings.log_level.upper(), logging.INFO),
@@ -22,6 +24,11 @@ app = FastAPI(
     debug=settings.debug
 )
 
+
+@app.on_event("startup")
+async def startup():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 # ===== 新增：注册路由 =====
 from src.routers import banking
 app.include_router(banking.router)

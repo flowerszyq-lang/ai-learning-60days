@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     # 服务端口
     port: int = 8000
 
+    database_url: str = "postgresql+asyncpg://postgres:postgres@localhost:5432/banking"
     class Config:
         # 指定从 .env 文件读取
         env_file = ".env"
