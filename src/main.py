@@ -7,6 +7,9 @@ import sys
 from .config import settings
 from .models import db_models  # 这行确保模型被注册
 from .database import engine, Base
+from src.routers import rag
+
+
 # ----- 配置日志（动态级别）-----
 logging.basicConfig(
     level=getattr(logging, settings.log_level.upper(), logging.INFO),
@@ -23,7 +26,7 @@ app = FastAPI(
     version="0.2.0",
     debug=settings.debug
 )
-
+app.include_router(rag.router)
 
 @app.on_event("startup")
 async def startup():

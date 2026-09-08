@@ -3,6 +3,8 @@ from sqlalchemy.dialects.postgresql import UUID
 from datetime import datetime
 import uuid
 from ..database import Base
+from sqlalchemy import Column, String, Text
+from pgvector.sqlalchemy import Vector  # 需要安装 pgvector 的 Python 包
 
 class Customer(Base):
     __tablename__ = "customers"
@@ -33,3 +35,11 @@ class Transaction(Base):
     type = Column(String(10), nullable=False)  # INCOME or EXPENSE
     note = Column(String(200))
     created_at = Column(DateTime, default=datetime.utcnow)
+
+# class Document(Base):
+#     __tablename__ = "documents"
+#
+# id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+# content = Column(Text, nullable=False)
+# metadata = Column(String(200))  # 可存来源、标题等
+# embedding = Column(Vector(384))  # 384 是 Sentence-BERT 的维度
