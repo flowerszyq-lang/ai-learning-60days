@@ -28,10 +28,10 @@ app = FastAPI(
 )
 app.include_router(rag.router)
 
-@app.on_event("startup")
-async def startup():
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
+# @app.on_event("startup")
+# async def startup():
+#     async with engine.begin() as conn:
+#         await conn.run_sync(Base.metadata.create_all)
 # ===== 新增：注册路由 =====
 from src.routers import banking
 app.include_router(banking.router)
