@@ -8,6 +8,7 @@ from .config import settings
 from .models import db_models  # 这行确保模型被注册
 from .database import engine, Base
 from src.routers import rag
+from src.middleware.logging_middleware import log_requests
 
 
 # ----- 配置日志（动态级别）-----
@@ -35,6 +36,9 @@ app.include_router(rag.router)
 # ===== 新增：注册路由 =====
 from src.routers import banking
 app.include_router(banking.router)
+
+# ===== 注册中间件 =====
+app.middleware("http")(log_requests)
 
 
 # ----- 日志中间件 -----
