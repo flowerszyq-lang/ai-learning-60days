@@ -9,6 +9,7 @@ from .models import db_models  # 这行确保模型被注册
 from .database import engine, Base
 from src.routers import rag
 from src.middleware.logging_middleware import log_requests
+from src.routers import agent
 
 
 # ----- 配置日志（动态级别）-----
@@ -28,6 +29,7 @@ app = FastAPI(
     debug=settings.debug
 )
 app.include_router(rag.router)
+app.include_router(agent.router)
 
 # @app.on_event("startup")
 # async def startup():
